@@ -25,6 +25,8 @@ char ssocket_accept_ssl(void *_ssd, void *_supla_socket);
 supla_socket_data *ssocket_client_init(const char host[], int port, unsigned char secure);
 unsigned char ssocket_client_connect(void *ssd, const char *state_file, int *err);
 
+void ssocket_ssl_error_log(void);
+
 char ssocket_openlistener(void *_ssd);
 
 int ssocket_read(void *_ssd, void *supla_socket, void *buf, int count);
