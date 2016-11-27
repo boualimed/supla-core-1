@@ -507,7 +507,7 @@ char ssocket_accept_ssl(void *_ssd, void *_supla_socket) {
 				supla_log(LOG_ERR,  "SO_RCVTIMEO/%i", tv.tv_sec);
 				ssocket_supla_socket_close(supla_socket);
 
-			};
+			}
 
 			if ( -1 == fcntl(supla_socket->sfd, F_SETFL, O_NONBLOCK) ) {
 
@@ -578,7 +578,7 @@ void ssocket_close(void *_ssd) {
 
 		ssocket_supla_socket_close(&ssd->supla_socket);
 
-		#ifndef NOSSL
+#ifndef NOSSL
 		if ( ssd->ctx ) {
 
 			SSL_CTX_free(ssd->ctx);
@@ -587,7 +587,7 @@ void ssocket_close(void *_ssd) {
 			ERR_free_strings();
 			EVP_cleanup();
 		}
-		#endif /*ifndef NOSSL*/
+#endif /*ifndef NOSSL*/
 	}
 
 }
@@ -602,7 +602,6 @@ int ssocket_client_openconnection(TSuplaSocketData *ssd, const char *state_file,
 	ssd->supla_socket.sfd = -1;
 
 #ifdef _WIN32
-	//struct addrinfo hints, *res;
 
 	if (WSAStartup(MAKEWORD(2, 2), &ssd->supla_socket.wsaData) != 0) {
 		return  ssd->supla_socket.sfd;
@@ -612,26 +611,10 @@ int ssocket_client_openconnection(TSuplaSocketData *ssd, const char *state_file,
 
 	if ( ssd->host != NULL && strlen(ssd->host) > 0 ) {
 
-		/*
-		#if defined(_WIN32) && WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
-
-		memset(&hints, 0, sizeof(hints));
-		hints.ai_family = AF_INET;
-		hints.ai_socktype = SOCK_STREAM;
-
-		if ( getaddrinfo(ssd->host, NULL, &hints, &res) == 0
-			 && res != NULL
-			 && res->ai_family == AF_INET ) {
-
-			ip = ((struct sockaddr_in*)res->ai_addr)->sin_addr.S_un.S_addr;
+		if ((host = gethostbyname(ssd->host)) != NULL) {
+			ip = *(long*)(host->h_addr);
 		}
-		#else
-		*/
-			if ((host = gethostbyname(ssd->host)) != NULL) {
-				ip = *(long*)(host->h_addr);
-			}
 
-		//#endif
 	}
 
 	if ( ip == 0 ) {
@@ -753,18 +736,18 @@ unsigned char ssocket_client_connect(void *_ssd, const char *state_file, int *er
 #endif
 
 		supla_log(LOG_DEBUG, "Connected with %s encryption", SSL_get_cipher(ssd->supla_socket.ssl));
-    		SSL_get_cipher(ssd->supla_socket.ssl);
-    		ssocket_showcerts(ssd->supla_socket.ssl);
+		SSL_get_cipher(ssd->supla_socket.ssl);
+		ssocket_showcerts(ssd->supla_socket.ssl);
 
-    		return (1);
-		}
-	#endif /*ifndef NOSSL*/
+		return (1);
+	}
+#endif /*ifndef NOSSL*/
 
 	return (0);
 }
 
 int ssocket_get_fd(void *ssd) {
-   return ((TSuplaSocketData *)ssd)->supla_socket.sfd;
+	return ((TSuplaSocketData *)ssd)->supla_socket.sfd;
 }
 
 char ssocket_is_secure(void *_ssd) {

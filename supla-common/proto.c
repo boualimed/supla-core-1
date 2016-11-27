@@ -237,7 +237,7 @@ char sproto_pop_in_sdp(void *spd_ptr, TSuplaDataPacket *sdp) {
 
 		if ( memcmp(spd->in.buffer, sproto_tag, SUPLA_TAG_SIZE) == 0 ) {
 			spd->in.begin_tag = 1;
-		} else 
+		} else {
 			sproto_shrink_in_buffer(&spd->in, spd->in.data_size);
 			return SUPLA_RESULT_DATA_ERROR;
 		}
