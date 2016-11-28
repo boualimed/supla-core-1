@@ -6,7 +6,7 @@
 CPP_SRCS += \
 ../src/accept_loop.cpp \
 ../src/ipcctrl.cpp \
-../src/supla-dev.cpp 
+../src/supla-dev.cpp
 
 C_SRCS += \
 ../src/cfg.c \
@@ -29,7 +29,7 @@ C_SRCS += \
 ../src/sthread.c \
 ../src/supla-socket.c \
 ../src/tools.c \
-../src/w1.c 
+../src/w1.c
 
 OBJS += \
 ./src/accept_loop.o \
@@ -78,26 +78,26 @@ C_DEPS += \
 ./src/sthread.d \
 ./src/supla-socket.d \
 ./src/tools.d \
-./src/w1.d 
+./src/w1.d
 
 CPP_DEPS += \
 ./src/accept_loop.d \
 ./src/ipcctrl.d \
-./src/supla-dev.d 
+./src/supla-dev.d
 
 
 # Each subdirectory must supply rules for building sources it contributes
 src/%.o: ../src/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross G++ Compiler'
-	g++ -D__OPEN_SSL=1 -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	g++ -D__OPEN_SSL=1 -O3 -Wall $(CPPFLAGS) -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
 src/%.o: ../src/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross GCC Compiler'
-	gcc -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	gcc -O3 -Wall $(CFLAGS) -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

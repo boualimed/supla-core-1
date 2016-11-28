@@ -45,7 +45,7 @@ all: supla-console-client
 supla-console-client: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross G++ Linker'
-	g++ -pthread -lrt -o "supla-console-client" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -lpthread -o "supla-console-client" $(OBJS) $(USER_OBJS) $(LIBS) $(LDFLAGS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

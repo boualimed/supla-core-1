@@ -44,7 +44,7 @@ all: supla-server
 supla-server: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross G++ Linker'
-	g++ -L/usr/include/mysql -pthread -lrt -o "supla-server" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -lpthread -o "supla-server" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
