@@ -12,8 +12,8 @@
 #     a generated lib/image xxx.a ()
 #
 TARGET = eagle
-#FLAVOR = release
-FLAVOR = debug
+FLAVOR = release
+#FLAVOR = debug
 
 
 EXTRA_CCFLAGS += -DESP8266 -D__SINGLE_THREAD -D__EH_DISABLED -D__BOARD_$(BOARD) -DCFG_SECTOR=$(CFG_SECTOR) -DNOSSL=$(NOSSL)
