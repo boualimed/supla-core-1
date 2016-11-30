@@ -12,6 +12,19 @@ SDK_VERSION="8.4"
 BUILD_CFG="Release"
 IOS_OPENSSL_LIB_INC="../../OpenSSL-for-iPhone/include"
 
+OS=`uname -s`
+
+case $OS in
+Darwin)
+    ;;
+*)
+    echo
+    echo "Supported only on macOS!"
+    echo
+    exit 1
+    ;;
+esac
+
 BUILD_DIR="./"$BUILD_CFG
 DEVELOPER=`xcode-select -print-path`
 
