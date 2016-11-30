@@ -4,9 +4,9 @@ OS=`uname -s`
 
 case $OS in
 Darwin)
-	export CFLAGS=-I/opt/local/include
-	export CPPFLAGS=-I/opt/local/include
-	export LDFLAGS=-L/opt/local/lib
+	echo
+	echo "macOS not supported!"
+	echo
 	;;
 Linux)
 	export CFLAGS=
