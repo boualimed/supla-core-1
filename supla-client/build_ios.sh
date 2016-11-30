@@ -10,16 +10,7 @@
 
 SDK_VERSION="8.4"
 BUILD_CFG="Release"
-IOS_OPENSSL_LIB_INC="../../../openssl/include"
-
-if [ ! -z $1 ]; then
-
-   BUILD_CFG=$1
-
-   if [ ! -z $2  ]; then
-     SDK_VERSION=$2
-   fi
-fi
+IOS_OPENSSL_LIB_INC="../../OpenSSL-for-iPhone/include"
 
 BUILD_DIR="./"$BUILD_CFG
 DEVELOPER=`xcode-select -print-path`
@@ -54,6 +45,12 @@ build()
 }
 
 CWD=`pwd`
+
+if [ ! -f "../OpenSSL-for-iPhone/lib/libssl.a" ]; then
+    cd ../OpenSSL-for-iPhone
+    ./build-libssl.sh --ios-sdk=${SDK_VERSION} --archs="x86_64 i386 arm64 armv7"
+    cd $CWD
+fi
 
 build "armv7"
 build "arm64"
