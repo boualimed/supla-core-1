@@ -33,6 +33,30 @@ if [ ! -d $BUILD_DIR ]; then
     exit;
 fi
 
+
+if [ ! -d "${DEVELOPER}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${SDK_VERSION}.sdk" ]; then
+    if [ ! -f Xcode_6.4.dmg ]; then
+        echo
+        echo "Please download Xcode and place here."
+        echo "Download link: http://adcdownload.apple.com/Developer_Tools/Xcode_6.4/Xcode_6.4.dmg"
+        echo "Then re-run this script again."
+        echo
+        exit 1
+    fi
+    echo "Mounting Xcode installer..."
+    hdiutil attach Xcode_6.4.dmg -noverify -nobrowse -mountpoint /Volumes/xcode
+    echo "Copying iPhoneOS${SDK_VERSION}.sdk..."
+    sudo cp -RL /Volumes/xcode/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${SDK_VERSION}.sdk \
+        ${DEVELOPER}/Platforms/iPhoneOS.platform/Developer/SDKs/
+    if [ ! -d "${DEVELOPER}/Platforms/iPhoneSimulator.platform/Developer/iPhoneSimulator${SDK_VERSION}.sdk" ]; then
+        echo "Copying iPhoneSimulator${SDK_VERSION}.sdk..."
+        sudo cp -RL /Volumes/xcode/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator${SDK_VERSION}.sdk \
+            ${DEVELOPER}/Platforms/iPhoneSimulator.platform/Developer/SDKs/
+    fi
+    echo "Unmounting Xcode installer..."
+    hdiutil detach /Volumes/xcode
+fi
+
 build()
 {
         ARCH=$1

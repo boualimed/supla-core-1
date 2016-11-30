@@ -8,6 +8,7 @@ tmp/
 *.swp
 *~.nib
 *.dmg
+libsupla-client.a
 local.properties
 .settings/
 .loadpath
