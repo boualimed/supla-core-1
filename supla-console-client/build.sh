@@ -16,5 +16,5 @@ Linux)
 esac
 
 
-make -C Release clean
-make -C Release all
+make -C Debug clean
+make -C Debug all
