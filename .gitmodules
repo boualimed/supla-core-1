@@ -1,4 +1,3 @@
-[submodule "openssl-for-iphone"]
-	path = openssl-for-iphone
+[submodule "OpenSSL-for-iPhone"]
+	path = OpenSSL-for-iPhone
 	url = https://github.com/x2on/OpenSSL-for-iPhone.git
-	branch = master
