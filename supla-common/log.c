@@ -54,11 +54,11 @@
 #endif
 
 #ifdef __LOG_CALLBACK
-	_supla_log_callback __supla_log_callback = NULL;
+_supla_log_callback __supla_log_callback = NULL;
 
-	void supla_log_set_callback(_supla_log_callback callback) {
-		__supla_log_callback = callback;
-	}
+void supla_log_set_callback(_supla_log_callback callback) {
+	__supla_log_callback = callback;
+}
 #endif
 
 char supla_log_string(char **buffer, int *size, va_list va, const char *__fmt) {

@@ -716,12 +716,12 @@ _supla_int_t SRPC_ICACHE_FLASH srpc_dcs_async_ping_server(void *_srpc) {
 _supla_int_t SRPC_ICACHE_FLASH srpc_sdc_async_ping_server_result(void *_srpc) {
 	TSDC_SuplaPingServerResult ps;
 
-	#ifdef ESP8266
+#ifdef ESP8266
 	ps.now.tv_sec = 0;
 	ps.now.tv_usec = 0;
-	#else
+#else
 	gettimeofday(&ps.now, NULL);
-	#endif
+#endif
 
 	return srpc_async_call(_srpc, SUPLA_SDC_CALL_PING_SERVER_RESULT, (char*)&ps, sizeof(TSDC_SuplaPingServerResult));
 }
