@@ -18,8 +18,8 @@
 #include <os_type.h>
 
 
-void supla_esp_pwm_init(void);
-void supla_esp_pwm_set_percent_duty(uint8 percent, uint8 percent_percent, uint8 channel);
+void ICACHE_FLASH_ATTR supla_esp_pwm_init(void);
+void ICACHE_FLASH_ATTR supla_esp_pwm_set_percent_duty(uint8 percent, uint8 percent_percent, uint8 channel);
 char ICACHE_FLASH_ATTR supla_esp_pwm_is_on(void);
 void ICACHE_FLASH_ATTR supla_esp_pwm_on(char on);
 
