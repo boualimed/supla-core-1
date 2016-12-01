@@ -22,6 +22,8 @@
 #include "gpio.h"
 #include "driver/dht22.h"
 
+#ifdef DHTSENSOR
+
 //#define DHT_DEBUG
 
 #ifdef DHT_DEBUG
@@ -143,3 +145,5 @@ bool DHTRead(DHT_Sensor *sensor, DHT_Sensor_Data* output)
 	}
 	return true;
 }
+
+#endif

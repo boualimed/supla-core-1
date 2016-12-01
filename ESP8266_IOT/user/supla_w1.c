@@ -15,6 +15,8 @@
 
 #include "supla_w1.h"
 
+#if defined(DS18B20) || defined(DS18B20)
+
 #ifdef W1_GPIO0
 int supla_w1_pin = GPIO_ID_PIN(0);
 #elif defined(W1_GPIO5)
@@ -46,3 +48,5 @@ void ICACHE_FLASH_ATTR supla_w1_init(void) {
 
 	GPIO_DIS_OUTPUT( supla_w1_pin );
 }
+
+#endif
