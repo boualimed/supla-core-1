@@ -56,10 +56,6 @@ user_rf_cal_sector_set(void)
 	return rf_cal_sec;
 }
 
-
-void user_rf_pre_init(){};
-
-
 void user_init(void)
 {
 	wifi_status_led_uninstall();

@@ -8,6 +8,7 @@ tmp/
 *.swp
 *~.nib
 *.dmg
+*.a
 libsupla-client.a
 local.properties
 .settings/
