@@ -22,6 +22,8 @@ CFG_SECTOR=0x3C
 NOSSL=0
 
 export COMPILE=gcc
+export SDK_PATH=${ESP_SDK_PATH}
+export SRC_ROOT=`pwd`
 
 case $1 in
    "dht11_esp01")
@@ -161,7 +163,7 @@ else
 fi
 
 make SUPLA_DEP_LIBS="$DEP_LIBS" BOARD=$1 CFG_SECTOR="$CFG_SECTOR" BOOT=new APP=1 SPI_SPEED=40 SPI_MODE=DIO SPI_SIZE_MAP=2 $EXTRA #&& \
-#cp $BIN_PATH/upgrade/user1.1024.new.2.bin /media/sf_Public/"$BOARD_NAME"_user1.1024.new.2.bin && \
-#cp $SDK_PATH/bin/boot_v1.2.bin /media/sf_Public/boot_v1.2.bin
+cp bin/upgrade/user1.1024.new.2.bin bin/"$BOARD_NAME"_user1.1024.new.2.bin && \
+cp $SDK_PATH/bin/boot_v1.6.bin bin/boot_v1.6.bin
 
 exit 0

@@ -29,8 +29,6 @@ SUBDIRS= \
 
 endif # } PDIR
 
-LDDIR = $(SDK_PATH)/ld
-
 CCFLAGS += -Os
 
 TARGET_LDFLAGS = \
@@ -44,7 +42,7 @@ ifeq ($(FLAVOR),debug)
 endif
 
 ifeq ($(FLAVOR),release)
-    TARGET_LDFLAGS += -g -O0
+    TARGET_LDFLAGS += -g0 -O0
 endif
 
 COMPONENTS_eagle.app.v6 = \
@@ -53,7 +51,6 @@ COMPONENTS_eagle.app.v6 = \
 	supla-dev/libsupladev.a
 
 LINKFLAGS_eagle.app.v6 = \
-	-L$(SDK_PATH)/lib \
 	-Wl,--gc-sections \
 	-nostdlib \
 	-T$(LD_FILE) \
@@ -69,13 +66,10 @@ LINKFLAGS_eagle.app.v6 = \
 	-lmain \
 	-llwip \
 	-lcrypto \
+	-lc \
 	$(SUPLA_DEP_LIBS) \
 	$(DEP_LIBS_eagle.app.v6) \
 	-Wl,--end-group
-
-DEPENDS_eagle.app.v6 = \
-	$(LD_FILE) \
-	$(LDDIR)/eagle.rom.addr.v6.ld
 
 #############################################################
 # Configuration i.e. compile options etc.
@@ -115,7 +109,7 @@ DDEFINES +=				\
 #
 
 INCLUDES := $(INCLUDES) -I $(PDIR)include
-sinclude $(SDK_PATH)/Makefile
+sinclude $(SRC_ROOT)/Makefile.sdk
 
 .PHONY: FORCE
 FORCE:

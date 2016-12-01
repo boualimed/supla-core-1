@@ -9,6 +9,7 @@ tmp/
 *~.nib
 *.dmg
 *.a
+*.out
 libsupla-client.a
 local.properties
 .settings/
