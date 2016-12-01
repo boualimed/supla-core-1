@@ -67,6 +67,7 @@ build()
                 PLATFORM="iPhoneOS"
         fi
 
+        CWD=`pwd`
         cd $BUILD_DIR
 
         export CROSS_TOP="${DEVELOPER}/Platforms/${PLATFORM}.platform/Developer"
@@ -79,14 +80,15 @@ build()
 
         mkdir -p ${ARCH}
         mv libsupla-client.a ${ARCH}
+        cd $CWD
 }
 
-CWD=`pwd`
+CWD1=`pwd`
 
 if [ ! -f "../OpenSSL-for-iPhone/lib/libssl.a" ]; then
     cd ../OpenSSL-for-iPhone
     ./build-libssl.sh --ios-sdk=${SDK_VERSION} --archs="x86_64 i386 arm64 armv7"
-    cd $CWD
+    cd $CWD1
 fi
 
 build "armv7"
@@ -94,8 +96,8 @@ build "arm64"
 build "x86_64"
 build "i386"
 
-echo $CWD
-cd $CWD
+echo $CWD1
+cd $CWD1
 
 lipo \
 	"${BUILD_DIR}/armv7/libsupla-client.a" \
