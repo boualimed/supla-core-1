@@ -28,7 +28,7 @@ void ICACHE_FLASH_ATTR supla_dht_init(void) {
 	supla_w1_init();
 }
 
-void
+void ICACHE_FLASH_ATTR
 supla_dht_read_th(void *timer_arg) {
 
 	DHT_Sensor sensor;
@@ -75,7 +75,7 @@ void ICACHE_FLASH_ATTR supla_get_temp_and_humidity(char value[SUPLA_CHANNELVALUE
 
 }
 
-void supla_dht_start(void) {
+void ICACHE_FLASH_ATTR supla_dht_start(void) {
 	supla_dht_last_temp = -275;
 	supla_dht_last_humidity = -1;
 

@@ -37,12 +37,12 @@ static float supla_ds18b20_divider;
 // TODO: Add support for multiple sensors
 // TODO: Add resolution setup
 
-void  supla_ds18b20_init(void) {
-
+void ICACHE_FLASH_ATTR supla_ds18b20_init(void)
+{
 	supla_w1_init();
 }
 
-void supla_ds18b20_reset(void)
+void ICACHE_FLASH_ATTR supla_ds18b20_reset(void)
 {
 	uint8_t retries = 125;
 	GPIO_DIS_OUTPUT( supla_w1_pin );
@@ -57,7 +57,7 @@ void supla_ds18b20_reset(void)
 	os_delay_us(480);
 }
 
-void supla_ds18b20_write_bit( int v )
+void ICACHE_FLASH_ATTR supla_ds18b20_write_bit( int v )
 {
 	GPIO_OUTPUT_SET( supla_w1_pin, 0 );
 	if( v ) {
@@ -71,7 +71,7 @@ void supla_ds18b20_write_bit( int v )
 	}
 }
 
-int supla_ds18b20_read_bit(void)
+int ICACHE_FLASH_ATTR supla_ds18b20_read_bit(void)
 {
 	int r;
 	GPIO_OUTPUT_SET( supla_w1_pin, 0 );
@@ -83,7 +83,7 @@ int supla_ds18b20_read_bit(void)
 	return r;
 }
 
-void  supla_ds18b20_write( uint8_t v, int power ) {
+void ICACHE_FLASH_ATTR supla_ds18b20_write( uint8_t v, int power ) {
 	uint8_t bitMask;
 	for (bitMask = 0x01; bitMask; bitMask <<= 1) {
 		supla_ds18b20_write_bit( (bitMask & v)?1:0);
@@ -94,7 +94,7 @@ void  supla_ds18b20_write( uint8_t v, int power ) {
 	}
 }
 
-uint8_t  supla_ds18b20_read() {
+uint8_t ICACHE_FLASH_ATTR supla_ds18b20_read() {
 	uint8_t bitMask;
 	uint8_t r = 0;
 	for (bitMask = 0x01; bitMask; bitMask <<= 1) {
@@ -104,7 +104,7 @@ uint8_t  supla_ds18b20_read() {
 }
 
 
-void supla_ds18b20_read_temperatureB(void *timer_arg) {
+void ICACHE_FLASH_ATTR supla_ds18b20_read_temperatureB(void *timer_arg) {
 
 	os_timer_disarm(&supla_ds18b20_timer2);
 
@@ -136,7 +136,7 @@ void supla_ds18b20_read_temperatureB(void *timer_arg) {
 
 }
 
-void supla_ds18b20_read_temperatureA(void *timer_arg) {
+void ICACHE_FLASH_ATTR supla_ds18b20_read_temperatureA(void *timer_arg) {
 
 	supla_ds18b20_reset();
 
@@ -173,7 +173,7 @@ void supla_ds18b20_read_temperatureA(void *timer_arg) {
 
 }
 
-void  supla_ds18b20_start(void) {
+void ICACHE_FLASH_ATTR supla_ds18b20_start(void) {
 	supla_ds18b20_last_temp = -275;
 
 	os_timer_disarm(&supla_ds18b20_timer1);
@@ -181,7 +181,7 @@ void  supla_ds18b20_start(void) {
 	os_timer_arm (&supla_ds18b20_timer1, 5000, 1);
 }
 
-void supla_get_temp_and_humidity(char value[SUPLA_CHANNELVALUE_SIZE]) {
+void ICACHE_FLASH_ATTR supla_get_temp_and_humidity(char value[SUPLA_CHANNELVALUE_SIZE]) {
 	// Only temperature
 	memcpy(value, &supla_ds18b20_last_temp, sizeof(double));
 }

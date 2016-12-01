@@ -69,7 +69,7 @@ void  supla_esg_gpio_relay_switch(char port);
 #include "com/zam/supla_esp_gpio.c"
 #endif
 
-void
+void ICACHE_FLASH_ATTR
 gpio16_output_conf(void)
 {
 	WRITE_PERI_REG(PAD_XPD_DCDC_CONF,
@@ -82,14 +82,14 @@ gpio16_output_conf(void)
 	           (READ_PERI_REG(RTC_GPIO_ENABLE) & (uint32)0xfffffffe) | (uint32)0x1);	//out enable
 }
 
-void
+void ICACHE_FLASH_ATTR
 gpio16_output_set(uint8 value)
 {
 	WRITE_PERI_REG(RTC_GPIO_OUT,
 	           (READ_PERI_REG(RTC_GPIO_OUT) & (uint32)0xfffffffe) | (uint32)(value & 1));
 }
 
-void
+void ICACHE_FLASH_ATTR
 gpio16_input_conf(void)
 {
 	WRITE_PERI_REG(PAD_XPD_DCDC_CONF,
@@ -102,25 +102,25 @@ gpio16_input_conf(void)
                    READ_PERI_REG(RTC_GPIO_ENABLE) & (uint32)0xfffffffe);	//out disable
 }
 
-uint8
+uint8 ICACHE_FLASH_ATTR
 gpio16_input_get(void)
 {
 	return (uint8)(READ_PERI_REG(RTC_GPIO_IN_DATA) & 1);
 }
 
-uint8
+uint8 ICACHE_FLASH_ATTR
 gpio16_output_get(void)
 {
 	return (uint8)(READ_PERI_REG(RTC_GPIO_OUT) & 1);
 }
 
-uint32
+uint32 ICACHE_FLASH_ATTR
 gpio_output_get(void)
 {
 	return GPIO_REG_READ(GPIO_OUT_ADDRESS);
 }
 
-void supla_esg_gpio_cfg_pressed(void) {
+void ICACHE_FLASH_ATTR supla_esg_gpio_cfg_pressed(void) {
 
 	if ( supla_esp_cfgmode_started() == 0 ) {
 
@@ -134,7 +134,7 @@ void supla_esg_gpio_cfg_pressed(void) {
 
 }
 
-void
+void ICACHE_FLASH_ATTR
 supla_esp_gpio_enable_input_port(char port) {
 
 	gpio_output_set(0, 0, 0, GPIO_ID_PIN(port));
@@ -149,7 +149,7 @@ supla_esp_gpio_enable_input_port(char port) {
 }
 
 #if defined(INPUT_PORT1) || defined(INPUT_PORT2)
-void
+void ICACHE_FLASH_ATTR
 supla_esp_gpio_check_inputs(void *timer_arg) {
 
 #ifdef INPUT_PORT1
@@ -195,7 +195,7 @@ supla_esp_gpio_check_inputs(void *timer_arg) {
 #endif
 
 #if defined(RELAY1_PORT) || defined(RELAY2_PORT)
-char supla_esp_gpio_relay_hi(int port, unsigned int *time, char hi) {
+char ICACHE_FLASH_ATTR supla_esp_gpio_relay_hi(int port, unsigned int *time, char hi) {
 
 	unsigned int t = system_get_time();
 	char result = 0;
@@ -223,7 +223,7 @@ char supla_esp_gpio_relay_hi(int port, unsigned int *time, char hi) {
 
 #ifdef RELAY1_PORT
 
-char supla_esp_gpio_relay1_hi(char hi) {
+char ICACHE_FLASH_ATTR supla_esp_gpio_relay1_hi(char hi) {
 
 	char result = supla_esp_gpio_relay_hi(RELAY1_PORT, &relay1_last_time, hi);
 
@@ -243,8 +243,7 @@ char supla_esp_gpio_relay1_hi(char hi) {
 	return result;
 }
 
-
-void supla_esg_gpio_relay_switch(char port) {
+void ICACHE_FLASH_ATTR supla_esg_gpio_relay_switch(char port) {
 
 	char hi = supla_esp_gpio_is_hi(port) == 1 ? 0 : 1;
 
@@ -285,7 +284,7 @@ void supla_esg_gpio_relay_switch(char port) {
 
 #ifdef RELAY2_PORT
 
-char supla_esp_gpio_relay2_hi(char hi) {
+char ICACHE_FLASH_ATTR supla_esp_gpio_relay2_hi(char hi) {
 	return supla_esp_gpio_relay_hi(RELAY2_PORT, &relay2_last_time, hi);
 }
 
@@ -294,7 +293,7 @@ char supla_esp_gpio_relay2_hi(char hi) {
 
 #if defined(DIMMER_CHANNEL)
 
-void supla_esg_gpio_pwm_onoff(void) {
+void ICACHE_FLASH_ATTR supla_esg_gpio_pwm_onoff(void) {
 
 	char pwm_on = supla_esp_pwm_is_on() == 1 ? 0 : 1 ;
 	supla_esp_pwm_on(pwm_on);
@@ -305,8 +304,7 @@ void supla_esg_gpio_pwm_onoff(void) {
 
 #endif
 
-void supla_esg_gpio_manual_pressed(void) {
-
+void ICACHE_FLASH_ATTR supla_esg_gpio_manual_pressed(void) {
 
 	if ( supla_esp_cfgmode_started() == 0 ) {
 
@@ -338,25 +336,25 @@ void supla_esg_gpio_manual_pressed(void) {
 }
 
 #if defined(BUTTON1_PORT) && defined(RELAY1_PORT)
-void
+void ICACHE_FLASH_ATTR
 supla_esg_gpio_button1_pressed(void) {
 	supla_esg_gpio_relay_switch(RELAY1_PORT);
 }
 #endif
 
 #if defined(BUTTON2_PORT) && defined(RELAY2_PORT)
-void
+void ICACHE_FLASH_ATTR
 supla_esg_gpio_button2_pressed(void) {
 	supla_esg_gpio_relay_switch(RELAY2_PORT);
 }
 #endif
 
-void
+void ICACHE_FLASH_ATTR
 supla_esp_gpio_reset_cfg_counter(void *timer_arg) {
 	switch_cfgbtn_counter = 0;
 }
 
-void
+void ICACHE_FLASH_ATTR
 supla_esp_gpio_check_switch_cfgbtn(void *timer_arg) {
 
 	char v = GPIO_INPUT_GET(GPIO_ID_PIN((int)timer_arg));
@@ -390,7 +388,6 @@ supla_esp_gpio_check_switch_cfgbtn(void *timer_arg) {
 
 LOCAL char
 supla_esp_key_intr_handler(uint32 gpio_status) {
-
 
 #if defined(INPUT_PORT1) || defined(INPUT_PORT2)
 
@@ -602,7 +599,7 @@ supla_esp_gpio_init(void) {
 
 }
 
-void
+void ICACHE_FLASH_ATTR
 supla_esp_gpio_hi(int port, char hi) {
 
 	//supla_log(LOG_DEBUG, "supla_esp_gpio_hi %i, %i", port, hi);
@@ -615,7 +612,7 @@ supla_esp_gpio_hi(int port, char hi) {
 
 }
 
-void supla_esp_gpio_set_led(char r, char g, char b) {
+void ICACHE_FLASH_ATTR supla_esp_gpio_set_led(char r, char g, char b) {
 
 	os_timer_disarm(&supla_gpio_timer1);
 
@@ -640,7 +637,7 @@ void supla_esp_gpio_set_led(char r, char g, char b) {
 
 
 #if defined(INPUT_PORT1) || defined(INPUT_PORT2)
-void  supla_esp_gpio_init_led(void) {
+void ICACHE_FLASH_ATTR supla_esp_gpio_init_led(void) {
 
 	ETS_GPIO_INTR_DISABLE();
 
@@ -671,7 +668,7 @@ void  supla_esp_gpio_init_led(void) {
 
 
 #if defined(LED_RED_PORT) || defined(LED_GREEN_PORT) || defined(LED_BLUE_PORT)
-void
+void ICACHE_FLASH_ATTR
 supla_esp_gpio_led_blinking_func(void *timer_arg) {
 
 #ifdef LED_RED_PORT
@@ -691,7 +688,7 @@ supla_esp_gpio_led_blinking_func(void *timer_arg) {
 
 }
 
-void
+void ICACHE_FLASH_ATTR
 supla_esp_gpio_led_blinking(int led, int time) {
 
 	supla_esp_gpio_set_led(0, 0, 0);
@@ -749,7 +746,7 @@ supla_esp_gpio_state_ipreceived(void) {
 #if defined(INPUT_PORT1) || defined(INPUT_PORT2)
 
 
-void
+void ICACHE_FLASH_ATTR
 supla_esp_gpio_enable_inputs(void *timer_arg) {
 
 	supla_esp_gpio_set_led(0, 0, 0);
@@ -820,7 +817,7 @@ supla_esp_gpio_state_cfgmode(void) {
 
 }
 
-char supla_esp_gpio_is_hi(int port) {
+char ICACHE_FLASH_ATTR supla_esp_gpio_is_hi(int port) {
 
 	if ( port == 16 ) {
 		return gpio16_output_get() == 1 ? 1 : 0;
@@ -829,7 +826,7 @@ char supla_esp_gpio_is_hi(int port) {
 	return GPIO_OUTPUT_GET(port) == 1 ? 1 : 0;
 }
 
-char supla_esp_gpio_relay_on(int port) {
+char ICACHE_FLASH_ATTR supla_esp_gpio_relay_on(int port) {
 	return GPIO_OUTPUT_GET(port) == HI_VALUE ? 1 : 0;
 }
 

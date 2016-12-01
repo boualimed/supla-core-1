@@ -16,8 +16,8 @@
 #ifdef DHTSENSOR
 
 void ICACHE_FLASH_ATTR supla_dht_init(void);
-void supla_get_temp_and_humidity(char value[SUPLA_CHANNELVALUE_SIZE]);
-void supla_dht_start(void);
+void ICACHE_FLASH_ATTR supla_get_temp_and_humidity(char value[SUPLA_CHANNELVALUE_SIZE]);
+void ICACHE_FLASH_ATTR supla_dht_start(void);
 
 #endif
 

@@ -56,7 +56,7 @@ user_rf_cal_sector_set(void)
 	return rf_cal_sec;
 }
 
-void user_init(void)
+void ICACHE_FLASH_ATTR user_init(void)
 {
 	wifi_status_led_uninstall();
 	supla_esp_cfg_init();

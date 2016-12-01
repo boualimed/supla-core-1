@@ -60,7 +60,7 @@ static inline float scale_temperature(DHTType sensor_type, int *data)
 	}
 }
 
-bool DHTRead(DHT_Sensor *sensor, DHT_Sensor_Data* output)
+bool ICACHE_FLASH_ATTR DHTRead(DHT_Sensor *sensor, DHT_Sensor_Data* output)
 {
 	int counter = 0;
 	int laststate = 1;

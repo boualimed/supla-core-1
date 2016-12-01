@@ -956,7 +956,7 @@ void ICACHE_FLASH_ATTR supla_esp_srpc_free(void) {
 	}
 }
 
-void supla_esp_srpc_init(void) {
+void ICACHE_FLASH_ATTR supla_esp_srpc_init(void) {
 
 	supla_esp_srpc_free();
 
@@ -973,17 +973,17 @@ void supla_esp_srpc_init(void) {
 
 }
 
-void supla_esp_devconn_connect_cb(void *arg) {
+void ICACHE_FLASH_ATTR supla_esp_devconn_connect_cb(void *arg) {
 	supla_log(LOG_DEBUG, "devconn_connect_cb\r\n");
 	supla_esp_srpc_init();
 }
 
-void supla_esp_devconn_disconnect_cb(void *arg){
+void ICACHE_FLASH_ATTR supla_esp_devconn_disconnect_cb(void *arg){
 	supla_log(LOG_DEBUG, "devconn_disconnect_cb\r\n");
 	supla_esp_system_restart();
 }
 
-void supla_esp_devconn_delayed_disconnect_event(int sec) {
+void ICACHE_FLASH_ATTR supla_esp_devconn_delayed_disconnect_event(int sec) {
 
 	os_timer_disarm(&supla_devconn_timer2);
 	os_timer_setfn(&supla_devconn_timer2, (os_timer_func_t *)supla_esp_devconn_disconnect_cb, NULL);
@@ -992,7 +992,7 @@ void supla_esp_devconn_delayed_disconnect_event(int sec) {
 }
 
 
-void supla_esp_devconn_dns_found_cb(const char *name, ip_addr_t *ip, void *arg) {
+void ICACHE_FLASH_ATTR supla_esp_devconn_dns_found_cb(const char *name, ip_addr_t *ip, void *arg) {
 
 	if ( ip == NULL ) {
 		supla_log(LOG_DEBUG, "Domain %s not found.", name);
@@ -1025,7 +1025,7 @@ void supla_esp_devconn_dns_found_cb(const char *name, ip_addr_t *ip, void *arg) 
 
 }
 
-void supla_esp_devconn_resolvandconnect(void) {
+void ICACHE_FLASH_ATTR supla_esp_devconn_resolvandconnect(void) {
 
 	devconn_autoconnect = 0;
 
