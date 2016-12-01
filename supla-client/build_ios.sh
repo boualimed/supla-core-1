@@ -8,7 +8,7 @@
 # ============================================================================
 
 
-SDK_VERSION="8.4"
+SDK_VERSION="9.3"
 BUILD_CFG="Release"
 IOS_OPENSSL_LIB_INC="../../OpenSSL-for-iPhone/include"
 
@@ -35,16 +35,16 @@ fi
 
 
 if [ ! -d "${DEVELOPER}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${SDK_VERSION}.sdk" ]; then
-    if [ ! -f Xcode_6.4.dmg ]; then
+    if [ ! -f Xcode_7.3.1.dmg ]; then
         echo
         echo "Please download Xcode and place here."
-        echo "Download link: http://adcdownload.apple.com/Developer_Tools/Xcode_6.4/Xcode_6.4.dmg"
+        echo "Download link: http://adcdownload.apple.com/Developer_Tools/Xcode_7.3.1/Xcode_7.3.1.dmg"
         echo "Then re-run this script again."
         echo
         exit 1
     fi
     echo "Mounting Xcode installer..."
-    hdiutil attach Xcode_6.4.dmg -noverify -nobrowse -mountpoint /Volumes/xcode
+    hdiutil attach Xcode_7.3.1.dmg -noverify -nobrowse -mountpoint /Volumes/xcode
     echo "Copying iPhoneOS${SDK_VERSION}.sdk..."
     sudo cp -RL /Volumes/xcode/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${SDK_VERSION}.sdk \
         ${DEVELOPER}/Platforms/iPhoneOS.platform/Developer/SDKs/
