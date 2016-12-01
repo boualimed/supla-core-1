@@ -363,6 +363,14 @@
 	#define RGBW_CONTROLLER_CHANNEL  0
 	#define COLOR_BRIGHTNESS_PWM
 
+#elif defined(__BOARD_rgb_aqua)
+
+	#define DEVICE_NAME "RGB-CONTROLLER-AQUA"
+
+	#define CFG_PORT         2
+	#define SUPLA_PWM_COUNT  3
+	#define RGB_CONTROLLER_CHANNEL  0
+
 
 #elif defined(__BOARD_h801)
 

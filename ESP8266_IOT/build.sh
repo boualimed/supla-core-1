@@ -103,6 +103,10 @@ case $1 in
      DEP_LIBS="-lpwm -lssl"
      CFG_SECTOR=0xBC
    ;;
+   "rgb_aqua")
+     DEP_LIBS="-lpwm -lssl"
+     CFG_SECTOR=0xBC
+   ;;
    "h801")
      DEP_LIBS="-lpwm -lssl"
      CFG_SECTOR=0xBC
@@ -143,6 +147,7 @@ case $1 in
    echo "              zam_row_01";
    echo "              rgbw";
    echo "              rgbw_wroom";
+   echo "              rgb_aqua";
    echo "              h801";
    echo
    echo
