@@ -41,15 +41,15 @@ static ETSTimer supla_iterate_timer;
 
 
 #ifdef RELAY1_PORT
-	static ETSTimer supla_relay1_timer;
+static ETSTimer supla_relay1_timer;
 #endif
 
 #ifdef RELAY2_PORT
-	static ETSTimer supla_relay2_timer;
+static ETSTimer supla_relay2_timer;
 #endif
 
 #ifdef RELAY3_PORT
-	static ETSTimer supla_relay3_timer;
+static ETSTimer supla_relay3_timer;
 #endif
 
 static struct espconn ESPConn;
@@ -320,41 +320,40 @@ char ICACHE_FLASH_ATTR _supla_esp_channel_set_value(int port, char v, int channe
 }
 
 #ifdef RELAY1_PORT
-	void ICACHE_FLASH_ATTR
-	supla_esp_relay1_timer_func(void *timer_arg) {
+void ICACHE_FLASH_ATTR
+supla_esp_relay1_timer_func(void *timer_arg) {
 
-		_supla_esp_channel_set_value(RELAY1_PORT, 0, 0);
+	_supla_esp_channel_set_value(RELAY1_PORT, 0, 0);
 
-	}
+}
 #endif
 
 #ifdef RELAY2_PORT
-	void ICACHE_FLASH_ATTR
-	supla_esp_relay2_timer_func(void *timer_arg) {
+void ICACHE_FLASH_ATTR
+supla_esp_relay2_timer_func(void *timer_arg) {
 
-		_supla_esp_channel_set_value(RELAY2_PORT, 0, 1);
-	}
+	_supla_esp_channel_set_value(RELAY2_PORT, 0, 1);
+}
 #endif
 
 #ifdef RELAY3_PORT
-	void ICACHE_FLASH_ATTR
-	supla_esp_relay3_timer_func(void *timer_arg) {
+void ICACHE_FLASH_ATTR
+supla_esp_relay3_timer_func(void *timer_arg) {
 
-		_supla_esp_channel_set_value(RELAY3_PORT, 0, 2);
-	}
+	_supla_esp_channel_set_value(RELAY3_PORT, 0, 2);
+}
 #endif
 
 #if defined(DIMMER_CHANNEL)
+char
+ICACHE_FLASH_ATTR supla_esp_channel_set_rgbw_value(int ChannelNumber, int *Color, char *ColorBrightness, char *Brightness) {
 
-	char
-	ICACHE_FLASH_ATTR supla_esp_channel_set_rgbw_value(int ChannelNumber, int *Color, char *ColorBrightness, char *Brightness) {
+	//supla_log(LOG_DEBUG, "Color: %i, CB: %i, B: %i", *Color, *ColorBrightness, *Brightness);
 
-		//supla_log(LOG_DEBUG, "Color: %i, CB: %i, B: %i", *Color, *ColorBrightness, *Brightness);
+	supla_esp_pwm_set_percent_duty(*Brightness, 100, 0);
 
-		supla_esp_pwm_set_percent_duty(*Brightness, 100, 0);
-
-		return 1;
-	}
+	return 1;
+}
 
 #elif defined(RGBW_CONTROLLER_CHANNEL) || defined(RGBWW_CONTROLLER_CHANNEL)
 
@@ -412,7 +411,8 @@ ICACHE_FLASH_ATTR supla_esp_channel_set_rgbw_value(int ChannelNumber, int *Color
 
 #elif defined(RGB_CONTROLLER_CHANNEL)
 
-char ICACHE_FLASH_ATTR supla_esp_channel_set_rgbw_value(int ChannelNumber, int *Color, char *ColorBrightness, char *Brightness) {
+char ICACHE_FLASH_ATTR
+supla_esp_channel_set_rgbw_value(int ChannelNumber, int *Color, char *ColorBrightness, char *Brightness) {
 
 	//supla_log(LOG_DEBUG, "Color: %i, CB: %i, B: %i", *Color, *ColorBrightness, *Brightness);
 
