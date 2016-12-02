@@ -169,6 +169,6 @@ fi
 
 make SUPLA_DEP_LIBS="$DEP_LIBS" BOARD=$1 CFG_SECTOR="$CFG_SECTOR" BOOT=new APP=1 SPI_SPEED=40 SPI_MODE=DIO SPI_SIZE_MAP=2 $EXTRA #&& \
 cp bin/upgrade/user1.1024.new.2.bin bin/"$BOARD_NAME"_user1.1024.new.2.bin && \
-cp $SDK_PATH/bin/boot_v1.6.bin bin/boot_v1.6.bin
+cp $SDK_PATH/bin/boot_v1.2.bin bin/boot_v1.2.bin
 
 exit 0
