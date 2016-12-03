@@ -368,6 +368,7 @@
 	#define DEVICE_NAME "RGB-CONTROLLER-AQUA"
 
 	#define CFG_PORT         4
+	#define LED_RED_PORT     5
 	#define SUPLA_PWM_COUNT  3
 	#define RGB_CONTROLLER_CHANNEL  0
 
