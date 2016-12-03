@@ -367,9 +367,21 @@
 
 	#define DEVICE_NAME "RGB-CONTROLLER-AQUA"
 
-	#define CFG_PORT         2
+	#define CFG_PORT         4
 	#define SUPLA_PWM_COUNT  3
 	#define RGB_CONTROLLER_CHANNEL  0
+
+	#define PWM_0_OUT_IO_MUX PERIPHS_IO_MUX_MTMS_U
+	#define PWM_0_OUT_IO_NUM 13
+	#define PWM_0_OUT_IO_FUNC  FUNC_GPIO13
+
+	#define PWM_1_OUT_IO_MUX PERIPHS_IO_MUX_MTCK_U
+	#define PWM_1_OUT_IO_NUM 12
+	#define PWM_1_OUT_IO_FUNC  FUNC_GPIO12
+
+	#define PWM_2_OUT_IO_MUX PERIPHS_IO_MUX_MTDI_U
+	#define PWM_2_OUT_IO_NUM 14
+	#define PWM_2_OUT_IO_FUNC  FUNC_GPIO14
 
 
 #elif defined(__BOARD_h801)
